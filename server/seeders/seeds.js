@@ -40,13 +40,12 @@ db.once('open', async () => {
   // create stores
   let createdStores = [];
   for (let i = 0; i < 100; i += 1) {
-    const storeText
-     = faker.lorem.words(Math.round(Math.random() * 20) + 1);
+    const storeName = faker.company.companyName();
 
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
 
-    const createdStore = await Store.create({ storeText
+    const createdStore = await Store.create({ storeName
       , username });
 
     const updatedUser = await User.updateOne(
