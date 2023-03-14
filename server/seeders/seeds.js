@@ -37,7 +37,7 @@ db.once('open', async () => {
     await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
   }
 
-  // create thoughts
+  // create stores
   let createdStores = [];
   for (let i = 0; i < 100; i += 1) {
     const storeText
@@ -46,15 +46,15 @@ db.once('open', async () => {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
 
-    const createdStores = await Store.create({ storeText
+    const createdStore = await Store.create({ storeText
       , username });
 
     const updatedUser = await User.updateOne(
       { _id: userId },
-      { $push: { thoughts: createdStores._id } }
+      { $push: { stores: createdStore._id } }
     );
 
-    createdStores.push(createdStores);
+    createdStores.push(createdStore);
   }
 
   // create reactions
@@ -64,8 +64,8 @@ db.once('open', async () => {
     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
     const { username } = createdUsers.ops[randomUserIndex];
 
-    const randomThoughtIndex = Math.floor(Math.random() * createdStores.length);
-    const { _id: storeId } = createdStores[randomThoughtIndex];
+    const randomStoreIndex = Math.floor(Math.random() * createdStores.length);
+    const { _id: storeId } = createdStores[randomStoreIndex];
 
     await Store.updateOne(
       { _id: storeId },

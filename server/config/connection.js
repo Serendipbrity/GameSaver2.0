@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/GameSaver2.0', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/GameSaver2', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

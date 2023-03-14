@@ -6,7 +6,7 @@ const storeSchema = new Schema(
   {
     storeName: {
       type: String,
-      required: 'You need to leave a store name!',
+      // required: 'You need to leave a store name!',
       minlength: 1,
       maxlength: 280
     },
@@ -17,7 +17,7 @@ const storeSchema = new Schema(
     },
     username: {
       type: String,
-      required: true
+      // required: true
     },
     reactions: [reactionSchema]
   },
