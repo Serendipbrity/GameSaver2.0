@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+// encrypt password
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
@@ -13,6 +14,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      // use regex to test that email is in correct format
       match: [/.+@.+\..+/, 'Must match an email address!']
     },
     password: {
@@ -20,10 +22,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    thoughts: [
+    stores: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Thought'
+        ref: 'Store'
       }
     ],
     friends: [
