@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
+const {Game} = require('./Game');
 const dateFormat = require('../utils/dateFormat');
 
 const storeSchema = new Schema(
@@ -19,7 +19,7 @@ const storeSchema = new Schema(
       type: String,
       // required: true
     },
-    reactions: [reactionSchema]
+    games: [ Game ]
   },
   {
     toJSON: {
@@ -28,10 +28,10 @@ const storeSchema = new Schema(
   }
 );
 
-storeSchema.virtual('reactionCount').get(function() {
-  return this.reactions.length;
+storeSchema.virtual('game').get(function() {
+  return this.games;
 });
 
 const Store = model('Store', storeSchema);
 
-module.exports = Store;
+module.exports =  Store ;

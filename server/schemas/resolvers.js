@@ -4,10 +4,11 @@ const { User, Store } = require("../models");
 
 const resolvers = {
   Query: {
-    stores: async () => {
-      return Store.find().sort({ createdAt: -1 });
-    }
-  }
+        stores: async (parent, { username }) => {
+          const params = username ? { username } : {};
+      return Store.find(params).sort({ createdAt: -1 });
+    },
+  },
 };
 
 module.exports = resolvers;
