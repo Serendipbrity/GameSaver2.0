@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const {Game} = require('./Game');
+// const  Game  = require('./Game');
 const dateFormat = require('../utils/dateFormat');
 
 const storeSchema = new Schema(
@@ -8,7 +8,7 @@ const storeSchema = new Schema(
       type: String,
       // required: 'You need to leave a store name!',
       minlength: 1,
-      maxlength: 280
+      maxlength: 80
     },
     createdAt: {
       type: Date,
@@ -19,7 +19,8 @@ const storeSchema = new Schema(
       type: String,
       // required: true
     },
-    games: [ Game ]
+    // games: [Game.schema] 
+    games: [{ type: Schema.Types.ObjectId, ref: 'Game' }]
   },
   {
     toJSON: {
@@ -28,9 +29,9 @@ const storeSchema = new Schema(
   }
 );
 
-storeSchema.virtual('game').get(function() {
-  return this.games;
-});
+// storeSchema.virtual('Game').get(function() {
+//   return this.games.find([ Game ]);
+// });
 
 const Store = model('Store', storeSchema);
 

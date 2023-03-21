@@ -1,15 +1,16 @@
 const { Schema, model } = require('mongoose');
+const Store = require('./Store');
 const dateFormat = require('../utils/dateFormat');
 
 const gameSchema = new Schema(
   {
     gameBrand: {
       type: String,
-      required: true,
+      // required: true,
     },
     gameType: {
       type: String,
-      required: true
+      // required: true
     },
     machineNumber: {
       type: Number,
@@ -19,7 +20,7 @@ const gameSchema = new Schema(
       ref: 'Report'
     },
     storeId: {
-      type: Number,
+      type: Schema.Types.ObjectId,
       ref: 'Store'
     },
     createdAt: {
@@ -35,6 +36,6 @@ const gameSchema = new Schema(
   }
 );
 
-const Game = ('Game', gameSchema);
+const Game = model('Game', gameSchema);
 
-module.exports = {Game};
+module.exports = Game;
