@@ -26,17 +26,17 @@ type User {
     gameBrand: String
     gameType: String
     machineNumber: Int
-    reportId: Int
+    reportId: String
     storeId: String
   }
 
   type Query {
     users:[User]
-    user(username:String): User
+    user(username:String, _id: ID!): User
     store(_id: ID!): Store
     stores(username: String): [Store]
     game(_id: ID!): Game
-    games(username: String): [Game]
+    games(username: String, storeId: ID!): [Game]
   }
 `;
 

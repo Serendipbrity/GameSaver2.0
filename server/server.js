@@ -2,6 +2,9 @@ const express = require("express");
 //  import ApolloServer
 const { ApolloServer } = require("apollo-server-express");
 
+// to color terminal text
+const colors = require("colors");
+
 // import typeDefs and resolvers
 const { typeDefs, resolvers } = require("./schemas");
 
@@ -30,7 +33,8 @@ const startApolloServer = async (typeDefs, resolvers) => {
   // listen for connection to be made
   db.once("open", () => {
     app.listen(PORT, () => {
-      console.log(`API server running on port ${PORT}!`);
+      console.log(`API server running on port ${PORT}!`.brightCyan);
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`.brightGreen);
     });
   });
 };

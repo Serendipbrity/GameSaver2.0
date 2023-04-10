@@ -16,10 +16,11 @@ const gameSchema = new Schema(
       type: Number,
     },
     reportId: {
-      type: Number,
+      type: Schema.Types.ObjectId,
       ref: 'Report'
     },
     storeId: {
+      // make storeId the same _id of the store that the game is in
       type: Schema.Types.ObjectId,
       ref: 'Store'
     },

@@ -4,11 +4,11 @@ const { User, Store, Game } = require("../models");
 
 const resolvers = {
     Query: {
-        // -----  GET all games -----
-        games: async (parent, { username }) => { 
-            const params = username ? { username } : {};
+        // -----  GET all games by username, storeId -----
+        games: async (parent, { username, storeId }) => { 
+            const params = (username, storeId) ? { username, storeId } : {};
             return await Game.find(params).sort({ createdAt: -1 });
-        },
+         },
         // -----  GET one game -----
         game: async (parent, { _id }) => { 
             return await Game.findOne({ _id });
@@ -29,7 +29,8 @@ const resolvers = {
             return await User.find()
                 // omit the __v and password fields when returning data
             .select('-__v -password')
-            .populate('stores')
+                .populate('stores')
+                .populate('games');
         },
         // -----  GET one user -----
         user: async (parent, { username }) => { 
