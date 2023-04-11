@@ -28,15 +28,21 @@ type User {
     machineNumber: Int
     reportId: String
     storeId: String
+    storeName: String
   }
 
   type Query {
     users:[User]
-    user(username:String, _id: ID!): User
-    store(_id: ID!): Store
-    stores(username: String): [Store]
-    game(_id: ID!): Game
-    games(username: String, storeId: ID!): [Game]
+    user(username:String, _id: ID): User
+    store(_id: ID, storeName: String): Store
+    stores(_id:ID, username: String, storeName: String): [Store]
+    game(_id: ID, storeId: ID, storeName: String): Game
+    games(username: String, storeId: ID, storeName: String): [Game]
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): User
+    addUser(username: String!, email: String!, password: String!): User
   }
 `;
 
